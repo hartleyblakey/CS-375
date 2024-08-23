@@ -1,1 +1,1 @@
-Hello, World!
+This is a repository containing my assignments for CS-375 Computer Graphics at SSU
