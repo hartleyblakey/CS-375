@@ -1,3 +1,1 @@
-I chose [shadertoy](https://www.shadertoy.com) as my example of a website that utilizes webGL. I love the idea of people trying to create the best things they can within the limitations of the site. More practically, it serves as a repository of shader code for other people to use or study.
-
-In case I needed to provide a specific shader, I like [this one](https://www.shadertoy.com/view/flc3Rn) even though the terrain is not really procedural.
+I like [this shader](https://www.shadertoy.com/view/flc3Rn) from shadertoy. I think it runs suprisingly well, considering the visuals and the limitations imposed by the website. It doesn't look like the terrain heightmap is fully procedural, but the compressed data is still relatively small compared to some other shadertoys ive seen.
