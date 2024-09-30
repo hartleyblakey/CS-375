@@ -40,7 +40,6 @@ class Spaceship {
         this.wings.draw();
         ms.pop();
 
-
         ms.push();
         ms.scale(1, 1, 4);
         ms.translate(0, 0, -1);
@@ -82,18 +81,24 @@ window.onload = () => {
 
     let planet = new Sphere(gl, 36, 18);
     let axes = new Axes(gl);
-    let ship1 = new Spaceship(gl);
+    let ship = new Spaceship(gl);
+    let ufo = new Tetrahedron(gl);
+    ufo.color = vec4(0.4, 0.4, 0.7, 1.0);
+    let star = new Tetrahedron(gl);
+    star.color = vec4(1, 1, 1, 1);
     let ms = new MatrixStack();
     ms.loadIdentity();
     let angle = 0.0;
     var lastTime = performance.now();
-    function vis(gl) {
+    function vis() {
         axes.MV = ms.current();
         axes.draw();
     }
+
+
+
+
     gl.enable(gl.DEPTH_TEST);
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     let render = () => {
         let time = performance.now();
         let dt = (time - lastTime) / 1000.0; // convert to seconds
@@ -104,38 +109,63 @@ window.onload = () => {
         angle %= 360.0;
 
         ms.push();
+        ms.rotate(time / 100.0, [0, 1, 0]);
+
+        // draw stars
+        for (var i = 0; i < 100; i++) {
+            ms.push();
+            // random enough rotations
+            ms.rotate(i * 100, [0, 0, 1]);
+            ms.rotate(i * 46, [1, 0, 0]);
+            ms.rotate(i * 11, [0, 1, 0]);
+            ms.translate(0.5, 0.0, 0.0);
+            ms.scale(0.01);
+            
+            star.MV = ms.current();
+            star.draw();
+            ms.pop();
+        }
+
+        ms.push();
         ms.scale(0.1, 0.1, 0.1);
         planet.MV = ms.current();
-        planet.color = vec4(0.8, 0.8, 0.8, 1.0);
+        planet.color = vec4(0.4, 0.5, 0.3, 1.0);
         planet.draw();
-            ms.push();
-            ms.translate(-0.01, -0.01, -0.01);
-            planet.color = vec4(0.2, 0.2, 0.2, 1.0);
-            planet.MV = ms.current();
-            planet.draw();
-            ms.pop();
+            // ms.push();
+            // ms.translate(-0.01, -0.01, -0.01);
+            // planet.color = vec4(0.2, 0.2, 0.2, 1.0);
+            // planet.MV = ms.current();
+            // planet.draw();
+            // ms.pop();
         ms.pop();
 
         ms.push();
             ms.rotate(angle, [1, 1, 0]);
-            //vis(gl);
             ms.push();
                 ms.translate(0.0, 0.0, 0.5);
                 ms.rotate(90.0, [1, 1, 0]);
-                ms.scale(0.01);
-                ship1.draw(ms);
+                ms.scale(0.008);
+                ship.draw(ms);
             ms.pop();
-
             ms.rotate(-50, [1, 1, 0]);
             ms.push();
                 ms.translate(0.0, 0.0, 0.5);
                 ms.rotate(90.0, [1, 1, 0]);
-                ms.scale(0.01);
-                ship1.draw(ms, Math.random() > 0.8);
+                ms.scale(0.005);
+                ship.draw(ms, Math.random() > 0.8);
             ms.pop();
         ms.pop();
-
-
+        
+        ms.push();
+        ms.scale(0.05);
+        ms.rotate(angle * 2.0 - 40, [1, 1, 0]);
+        ms.rotate(angle * 2 - 20, [1, 0, 1]);
+        ms.translate(3.3, 0.0, 0.0);
+        ms.scale(1.0 + Math.random() * 0.5);
+        ufo.MV = ms.current();
+        ufo.draw();
+        ms.pop();
+        ms.pop();
         requestAnimationFrame(render);
     };
 
