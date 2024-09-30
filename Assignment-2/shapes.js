@@ -10,7 +10,10 @@ class Spaceship {
         this.thruster = new Cone(gl, 8);
         this.thruster.color = vec4(1.0, 1.0, 1.0, 1.0);
 
-        this.lazer = new Axes(gl);
+        this.wings = new Cylinder(gl, 8);
+        this.wings.color = vec4(0.4, 0.4, 0.4, 1.0);
+
+        this.laser = new Axes(gl);
 
         this.gl = gl;
     }
@@ -30,6 +33,15 @@ class Spaceship {
         ms.pop();
 
         ms.push();
+        ms.rotate(45, [0, 0, 1])
+        ms.scale(8, 0.6, 4);
+        ms.translate(0, 0, 0.5);
+        this.wings.MV = ms.current();
+        this.wings.draw();
+        ms.pop();
+
+
+        ms.push();
         ms.scale(1, 1, 4);
         ms.translate(0, 0, -1);
         this.thruster.MV = ms.current();
@@ -40,9 +52,19 @@ class Spaceship {
             ms.push();
             ms.rotate(180, [0, 1, 1]);
             ms.rotate(90, [0, 0, 1]);
-            ms.scale(50.0, 0.01, 0.01);
-            this.lazer.MV = ms.current();
-            this.lazer.draw();
+                ms.push();
+                ms.translate(6.0, 4, 4.0);
+                ms.scale(50.0, 0.01, 0.01);
+                this.laser.MV = ms.current();
+                this.laser.draw();
+                ms.pop();
+
+                ms.push();
+                ms.translate(6.0, -4, -4.0);
+                ms.scale(50.0, 0.01, 0.01);
+                this.laser.MV = ms.current();
+                this.laser.draw();
+                ms.pop();
             ms.pop();
         }
 
@@ -78,7 +100,7 @@ window.onload = () => {
         lastTime = time;
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-        angle += 180.0 * dt;
+        angle += 90.0 * dt;
         angle %= 360.0;
 
         ms.push();
