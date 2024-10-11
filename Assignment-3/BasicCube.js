@@ -5,106 +5,56 @@
 //  A cube defined of 12 triangles
 //
 
+// for syntax highlighting, [stage]`` needs to be valid syntax
+// because of ??? x is no longer a string if we just pass it through
+const vert = x => (" " + x);
+const frag = x => (" " + x);
+
 class BasicCube {
-    // for syntax highlighting, [stage]`` needs to be valid syntax
-    // because of ??? x is no longer a string if we just pass it through
-    vert = x => (x + " ");
-    frag = x => (x + " ");
-
-    defaultVertexShader = vert`
-        in vec4 aPosition;
-        in vec4 aColor;
-
-        uniform mat4 P;
-        uniform mat4 MV;
-
-        void main() {
-            gl_Position = P * MV * aPosition;
-        }
-    `;
-
-    defaultFragmentShader = frag`
-        out vec4 fragColor;
-
-        void main() {
-            fragColor = vec4(0, 0.6, 0.6);
-        }
-    `;
-
-    cubePositions = Float32Array(
-        // -z
-        -1, -1, -1,
-        -1, +1, -1,
-        +1, +1, -1,
-
-        +1, +1, -1,
-        +1, -1, -1,
-        -1, -1, -1
-
-       // +z
-       -1, -1, +1,
-       -1, +1, +1,
-       +1, +1, +1,
-
-       +1, +1, +1,
-       +1, -1, +1,
-       -1, -1, +1
-
-        // -x
-        -1, -1, -1,
-        -1, +1, -1,
-        -1, +1, +1,
-
-        -1, +1, +1,
-        -1, -1, +1,
-        -1, -1, -1,
-    );
-
-    cubeColors = Float32Array(
-        0.2, 0.4, 0.6,
-        0.2, 0.4, 0.6,
-        0.2, 0.4, 0.6,
-
-        0.2, 0.4, 0.6,
-        0.2, 0.4, 0.6,
-        0.2, 0.4, 0.6,
-
-        0.2, 0.4, 0.6,
-        0.2, 0.4, 0.6,
-        0.2, 0.4, 0.6,
-
-        0.2, 0.4, 0.6,
-        0.2, 0.4, 0.6,
-        0.2, 0.4, 0.6,
-
-        0.2, 0.4, 0.6,
-        0.2, 0.4, 0.6,
-        0.2, 0.4, 0.6,
-
-        0.2, 0.4, 0.6,
-        0.2, 0.4, 0.6,
-        0.2, 0.4, 0.6,
-    );
-
     constructor(gl, vertexShader, fragmentShader) {
-        vertexShader    |= this.defaultVertexShader;
-        fragmentShader  |= this.defaultFragmentShader;
+        let defaultVertexShader = vert`
+            in vec4 aPosition;
+            in vec4 aColor;
 
-        this.program = new ShaderProgram(gl, this, vertexShader, fragmentShader);
+            out vec3 vColor;
 
-        this.positions   = new Attribute(gl, program, "aPosition", cubePositions, 3, gl.FLOAT, false, 24, 0);
-        this.colors      = new Attribute(gl, program, "aColor"   , cubeColors   , 3, gl.FLOAT, false, 24, 12);
+            uniform mat4 P;
+            uniform mat4 MV;
+
+            void main() {
+                gl_Position = P * MV * vec4(aPosition.xyz * 0.3, aPosition.w);
+                vColor = vec3(aColor.rgb);
+            }
+        `;
+
+        let defaultFragmentShader = frag`
+            out vec4 fragColor;
+            
+            in vec3 vColor;
+
+            void main() {
+                fragColor = vec4(vColor, 1.0);
+            }
+        `;
+
+        vertexShader    ||= defaultVertexShader;
+        fragmentShader  ||= defaultFragmentShader;
+
+        let program = new ShaderProgram(gl, this, vertexShader, fragmentShader);
+
+        let positions     = new Attribute(gl, program, "aPosition", cubePositions, 3, gl.FLOAT);
+        let colors        = new Attribute(gl, program, "aColor"   , cubeColors   , 3, gl.FLOAT);
 
         this.draw = () => {
-            this.program.use();
+            program.use();
 
-            this.positions.enable();
-            this.colors.enable();
+            positions.enable();
+            colors.enable();
 
-            gl.drawArrays();
+            gl.drawArrays(gl.TRIANGLES, 0, cubePositions.length / 3);
 
-            this.positions.disable();
-            this.colors.disable();
+            positions.disable();
+            colors.disable();
         };
     }
 };
