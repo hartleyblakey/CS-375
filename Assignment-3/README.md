@@ -1,6 +1,8 @@
 This is my submission for assignment 3 of CS-375.
 [It is hosted here](https://blue.cs.sonoma.edu/~hblakey/CS-375/Assignment-3/cubes.html)
 
+This version uses the fetch api so I can write shaders in their own files, with proper auto complete and inline documentation. There is a global ResourceManager singleton, and each cube requests the shaders it needs at module scope. The requests are fulfilled at the end of cubes.js, before the init() function is called.
+
 **(Note: some commit timestamps are incorrect. In particular, the work for "fix return statement in vec3()" and "first pass at experimental cube" was completed in the same session as the commits before it)**
 
 It renders a cube using three different methods:
