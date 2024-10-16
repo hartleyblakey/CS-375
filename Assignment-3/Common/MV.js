@@ -54,6 +54,8 @@ function vec3() {
     
     result = result.splice( 0, 3 );
     result.type = "vec3";
+
+    return result;
 }
 
 function vec4() {
