@@ -1,4 +1,5 @@
 This is my submission for assignment 3 of CS-375.
+[It is hosted here](https://blue.cs.sonoma.edu/~hblakey/CS-375/Assignment-3/cubes.html)
 
 **(Note: some commit timestamps are incorrect. In particular, the work for "fix return statement in vec3()" and "first pass at experimental cube" was completed in the same session as the commits before it)**
 
