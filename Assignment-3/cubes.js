@@ -12,6 +12,9 @@
 //    syntax (i.e., () => { ... })
 //
 
+import resourceLoader from "./modules/ResourceLoader.js";
+import ExperimentalCube from "./ExperimentalCube.js";
+
 function init() {
     let canvas = document.getElementById("webgl-canvas");
     let gl = canvas.getContext("webgl2");
@@ -84,4 +87,4 @@ function init() {
     render();
 }
 
-window.onload = init;
+window.onload = () => resourceLoader.loadAll().finally(init);
