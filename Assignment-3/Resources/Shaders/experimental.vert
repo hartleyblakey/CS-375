@@ -1,4 +1,4 @@
-#version 300es
+#version 300 es
 precision mediump float;
 
 uniform mat4 P;
