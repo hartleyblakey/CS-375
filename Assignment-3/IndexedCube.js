@@ -8,7 +8,26 @@
 
 
 class IndexedCube {
+
+    
+
     constructor(gl, vertexShader, fragmentShader) {
+
+        // sphere?
+        let cubeColorsIndexed = [
+            add(mult(normalize(cubePositionsIndexed[0]), vec3(0.5, 0.5, 0.5)),vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(cubePositionsIndexed[1]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(cubePositionsIndexed[2]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(cubePositionsIndexed[3]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+
+            add(mult(normalize(cubePositionsIndexed[4]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(cubePositionsIndexed[5]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(cubePositionsIndexed[6]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(cubePositionsIndexed[7]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+
+        ];
+
+        
 
         let defaultVertexShader = vert`
             in vec4 aPosition;
@@ -20,7 +39,7 @@ class IndexedCube {
             uniform mat4 MV;
 
             void main() {
-                gl_Position = P * MV * vec4(aPosition.xyz * 0.3, aPosition.w);
+                gl_Position = P * MV * vec4(aPosition.xyz - 0.5, aPosition.w);
                 vColor = vec3(aColor.rgb);
             }
         `;
@@ -30,6 +49,8 @@ class IndexedCube {
             
             in vec3 vColor;
 
+            uniform mat4 MV;
+
             void main() {
                 fragColor = vec4(vColor, 1.0);
             }
@@ -38,19 +59,22 @@ class IndexedCube {
         vertexShader    ||= defaultVertexShader;
         fragmentShader  ||= defaultFragmentShader;
 
+
         let program = new ShaderProgram(gl, this, vertexShader, fragmentShader);
 
-        let positions     = new Attribute(gl, program, "aPosition", cubePositions, 3, gl.FLOAT);
-        let colors        = new Attribute(gl, program, "aColor"   , cubeColors   , 3, gl.FLOAT);
-
+        let positions     = new Attribute(gl, program, "aPosition", new Float32Array(cubePositionsIndexed.flat()), 3, gl.FLOAT);
+        let colors        = new Attribute(gl, program, "aColor"   , new Float32Array(cubeColorsIndexed.flat())   , 3, gl.FLOAT);
+        let indices       = new Indices(  gl, cubeIndices)
         this.draw = () => {
             program.use();
 
             positions.enable();
             colors.enable();
+            indices.enable();
 
-            gl.drawArrays(gl.TRIANGLES, 0, cubePositions.length / 3);
+            gl.drawElements(gl.TRIANGLES, cubeIndices.length, gl.UNSIGNED_SHORT, 0);
 
+            indices.disable();
             positions.disable();
             colors.disable();
         };

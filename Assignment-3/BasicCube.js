@@ -17,7 +17,7 @@ class BasicCube {
             uniform mat4 MV;
 
             void main() {
-                gl_Position = P * MV * vec4(aPosition.xyz * 0.3, aPosition.w);
+                gl_Position = P * MV * vec4(aPosition.xyz - 0.5, aPosition.w);
                 vColor = vec3(aColor.rgb);
             }
         `;
@@ -37,8 +37,8 @@ class BasicCube {
 
         let program = new ShaderProgram(gl, this, vertexShader, fragmentShader);
 
-        let positions     = new Attribute(gl, program, "aPosition", cubePositions, 3, gl.FLOAT);
-        let colors        = new Attribute(gl, program, "aColor"   , cubeColors   , 3, gl.FLOAT);
+        let positions     = new Attribute(gl, program, "aPosition", new Float32Array(cubePositions.flat()), 3, gl.FLOAT);
+        let colors        = new Attribute(gl, program, "aColor"   , new Float32Array(cubeColors.flat())   , 3, gl.FLOAT);
 
         this.draw = () => {
             program.use();
@@ -46,7 +46,7 @@ class BasicCube {
             positions.enable();
             colors.enable();
 
-            gl.drawArrays(gl.TRIANGLES, 0, cubePositions.length / 3);
+            gl.drawArrays(gl.TRIANGLES, 0, cubePositions.length);
 
             positions.disable();
             colors.disable();
