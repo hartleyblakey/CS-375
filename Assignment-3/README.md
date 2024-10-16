@@ -1,6 +1,6 @@
 This is my submission for assignment 3 of CS-375.
 
-(Note: some commit timestamps are incorrect. In particular, the work for "fix return statement in vec3()" and "first pass at experimental cube" was completed in the same session as the commits before it)
+**(Note: some commit timestamps are incorrect. In particular, the work for "fix return statement in vec3()" and "first pass at experimental cube" was completed in the same session as the commits before it)**
 
 It renders a cube using three different methods:
 
