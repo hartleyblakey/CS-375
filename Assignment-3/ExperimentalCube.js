@@ -6,12 +6,12 @@
 //
 import resourceLoader from "./modules/ResourceLoader.js";
 
-const defaultShaderName = "experimental";
+const defaultShaderName = "golf";
 
 resourceLoader.requestShader(defaultShaderName);
 
 class ExperimentalCube {
-    constructor(gl, vertexShader, fragmentShader) {
+    constructor(/** @type {WebGL2RenderingContext} */gl   , vertexShader, fragmentShader) {
         let defaultShader = resourceLoader.getShader(defaultShaderName);
 
         vertexShader    ||= defaultShader.vert;
@@ -21,9 +21,7 @@ class ExperimentalCube {
 
         this.draw = () => {
             program.use();
-
-            gl.drawArrays(gl.TRIANGLES, 0, 36);
-
+            gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, 6);
         };
     }
 };
