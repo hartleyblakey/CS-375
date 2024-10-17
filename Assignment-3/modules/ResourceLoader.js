@@ -8,13 +8,13 @@ class ResourceLoader {
         if (ResourceLoader.instance) {
             throw new Error("Attempted to construct another ResourceLoader");
         }
-        this.textRequests = [];
-        this.loadedFiles = [];
+        this.textRequests = new Set;
+        this.loadedFiles = new Map;
         ResourceLoader.instance = this;
     }
 
     requestText(path) {
-        this.textRequests.push(path);
+        this.textRequests.add(path);
     }
 
     requestShader(name) {
@@ -41,7 +41,7 @@ class ResourceLoader {
     }
 
     async loadAll() {
-        for await (const path of this.textRequests) {
+        for (const path of this.textRequests) {
             this.loadedFiles[path] = await((await fetch(path, {cache: "no-cache"})).text());
         }
     }
