@@ -15,15 +15,15 @@ class IndexedCube {
 
         // sphere?
         let cubeColorsIndexed = [
-            add(mult(normalize(cubePositionsIndexed[0]), vec3(0.5, 0.5, 0.5)),vec3(0.5, 0.5, 0.5)),
-            add(mult(normalize(cubePositionsIndexed[1]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
-            add(mult(normalize(cubePositionsIndexed[2]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
-            add(mult(normalize(cubePositionsIndexed[3]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(add(cubePositionsIndexed[0], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(add(cubePositionsIndexed[1], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(add(cubePositionsIndexed[2], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(add(cubePositionsIndexed[3], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
 
-            add(mult(normalize(cubePositionsIndexed[4]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
-            add(mult(normalize(cubePositionsIndexed[5]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
-            add(mult(normalize(cubePositionsIndexed[6]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
-            add(mult(normalize(cubePositionsIndexed[7]), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(add(cubePositionsIndexed[4], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(add(cubePositionsIndexed[5], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(add(cubePositionsIndexed[6], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
+            add(mult(normalize(add(cubePositionsIndexed[7], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
 
         ];
 
@@ -48,8 +48,6 @@ class IndexedCube {
             out vec4 fragColor;
             
             in vec3 vColor;
-
-            uniform mat4 MV;
 
             void main() {
                 fragColor = vec4(vColor, 1.0);
