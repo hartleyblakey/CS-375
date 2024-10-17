@@ -22,12 +22,12 @@ function init() {
 function onLoadResources() {
     /** @type {HTMLCanvasElement} */
     let canvas = document.getElementById("webgl-canvas");
-
-    /** @type {WebGLRenderingContext} */
+    
+    /** @type {WebGL2RenderingContext} */    
     let gl = canvas.getContext("webgl2");
 
-    gl.clearColor(0, 0, 1, 1);
 
+    gl.clearColor(0, 0, 1, 1);
     gl.enable(gl.SCISSOR_TEST);
     gl.enable(gl.DEPTH_TEST);
 
