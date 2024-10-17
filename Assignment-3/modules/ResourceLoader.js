@@ -34,8 +34,6 @@ class ResourceLoader {
         var res = Object();
         res.frag = this.get(shaderPath(name, "frag"));
         res.vert = this.get(shaderPath(name, "vert"));
-        alert(shaderPath(name, "frag"));
-        alert(res.vert);
         if (!res.frag || !res.vert) {
             alert("unable to find resource at " + path);
         }
