@@ -19,10 +19,10 @@ void main() {
     v = i & 1 ^ (i /= 2) & 1;
 
     // p.[x, x, x, x, y, y] = quad.x(or quad.y if flipped)
-    p[i / 2] = q[v ^ 1];     
-
-    // p.[y, y, z, z, z, z] = quad.y(or quad.x if flipped)
     p[(i + 1) / 2 + 1] = q[v];
+      
+    // p.[y, y, z, z, z, z] = quad.y(or quad.x if flipped)
+    p[i / 2] = q[v ^ 1];   
 
     gl_Position = P * MV * vec4(p -= .5f, 1);
 }
