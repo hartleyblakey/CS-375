@@ -16,6 +16,10 @@ import resourceLoader from "./modules/ResourceLoader.js";
 import ExperimentalCube from "./ExperimentalCube.js";
 
 function init() {
+    resourceLoader.loadAll().finally(onLoadResources);
+}
+
+function onLoadResources() {
     let canvas = document.getElementById("webgl-canvas");
     let gl = canvas.getContext("webgl2");
 
@@ -87,4 +91,4 @@ function init() {
     render();
 }
 
-window.onload = () => resourceLoader.loadAll().finally(init);
+window.onload = init;
