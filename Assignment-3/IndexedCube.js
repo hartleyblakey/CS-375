@@ -29,7 +29,7 @@ class IndexedCube {
 
         
 
-        let defaultVertexShader = vert`
+        let defaultVertexShader = /*glsl*/`
             in vec4 aPosition;
             in vec4 aColor;
 
@@ -44,11 +44,11 @@ class IndexedCube {
             }
         `;
 
-        let defaultFragmentShader = frag`
+        let defaultFragmentShader = /*glsl*/`
             out vec4 fragColor;
             
             in vec3 vColor;
-
+            
             void main() {
                 fragColor = vec4(vColor, 1.0);
             }

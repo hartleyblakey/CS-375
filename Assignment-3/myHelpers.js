@@ -1,8 +1,3 @@
-// for syntax highlighting, [stage]`` needs to be valid syntax
-// because of ??? x is no longer a string if we just pass it through
-const vert = x => (" " + x);
-const frag = x => (" " + x);
-
 cubePositions = [
     // -z
     vec3(0, 0, 0),

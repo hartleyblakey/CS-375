@@ -7,7 +7,7 @@
 
 class BasicCube {
     constructor(gl, vertexShader, fragmentShader) {
-        let defaultVertexShader = vert`
+        let defaultVertexShader = /*glsl*/`
             in vec4 aPosition;
             in vec4 aColor;
 
@@ -22,7 +22,7 @@ class BasicCube {
             }
         `;
 
-        let defaultFragmentShader = frag`
+        let defaultFragmentShader = /*glsl*/`
             out vec4 fragColor;
             
             in vec3 vColor;
