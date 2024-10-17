@@ -29,8 +29,8 @@ const int[36] i = int[36](
 
 );
 
-#define p(i) (vec3((i) & 1, ((i) >> 1) & 1, (i) >> 2)-0.5)
+#define p(v) (vec3((v) >> 2, ((v) >> 1) & 1, (v) & 1)-0.5)
 void main() {
-    pos = p(7-i[gl_VertexID]);
+    pos = p(i[gl_VertexID]);
     gl_Position = P * MV * vec4(pos,1);
 }
