@@ -20,7 +20,10 @@ function init() {
 }
 
 function onLoadResources() {
+    /** @type {HTMLCanvasElement} */
     let canvas = document.getElementById("webgl-canvas");
+
+    /** @type {WebGLRenderingContext} */
     let gl = canvas.getContext("webgl2");
 
     gl.clearColor(0, 0, 1, 1);
