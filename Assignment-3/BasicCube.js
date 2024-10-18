@@ -37,6 +37,8 @@ class BasicCube {
 
         let program = new ShaderProgram(gl, this, vertexShader, fragmentShader);
 
+        let cubeColors = cubePositions.map(pos => mix(pos, vec3(0.5, 0.5, 0.5), 0.4));
+
         let positions     = new Attribute(gl, program, "aPosition", new Float32Array(cubePositions.flat()), 3, gl.FLOAT);
         let colors        = new Attribute(gl, program, "aColor"   , new Float32Array(cubeColors.flat())   , 3, gl.FLOAT);
 

@@ -12,22 +12,9 @@ class IndexedCube {
     
 
     constructor(gl, vertexShader, fragmentShader) {
-
-        // sphere?
-        let cubeColorsIndexed = [
-            add(mult(normalize(add(cubePositionsIndexed[0], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
-            add(mult(normalize(add(cubePositionsIndexed[1], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
-            add(mult(normalize(add(cubePositionsIndexed[2], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
-            add(mult(normalize(add(cubePositionsIndexed[3], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
-
-            add(mult(normalize(add(cubePositionsIndexed[4], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
-            add(mult(normalize(add(cubePositionsIndexed[5], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
-            add(mult(normalize(add(cubePositionsIndexed[6], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
-            add(mult(normalize(add(cubePositionsIndexed[7], vec3(-0.5, -0.5, -0.5))), vec3(0.5, 0.5, 0.5)), vec3(0.5, 0.5, 0.5)),
-
-        ];
-
-        
+        let cubeColorsIndexed = cubePositionsIndexed.map(
+            pos => mix(pos, vec3(0.5, 0.5, 0.5), 0.4)
+        )
 
         let defaultVertexShader = /*glsl*/`
             in vec4 aPosition;

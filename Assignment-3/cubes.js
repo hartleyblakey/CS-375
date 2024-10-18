@@ -81,6 +81,7 @@ function onLoadResources() {
             gl.viewport(...v.vp);
             gl.scissor(...v.vp);
             gl.clearColor(...v.cc);
+            gl.clearColor(0,0,0,1);
             gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
 
             cubes[i].MV = ms.current();

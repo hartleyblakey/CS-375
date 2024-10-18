@@ -87,7 +87,8 @@ cubeIndices = new Uint16Array([
 ]);
 
 
-cubeColors = [
+
+cubeNormalsFlat = [
     // -z
     vec3(0.5, 0.5, 0.0),
     vec3(0.5, 0.5, 0.0),
