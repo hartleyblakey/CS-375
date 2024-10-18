@@ -70,7 +70,7 @@ function onLoadResources() {
             },
         ];
 
-        angle += 3.0;
+        angle += 1.0;
         angle %= 360.0;
 
         ms.push();
