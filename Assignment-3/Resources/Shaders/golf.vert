@@ -10,7 +10,7 @@ void main() {
 
     // cube vertices
     // looks like |_|
-    p = vec3(v / 4, (v / 2 + 1) / 2 % 2, v % 2) - .5;
+    p = vec3(v / 4, v % 6 > 1, v % 2) - .5;
 
     // rotates the |_| if its the second instance
     // could be inlined if I didnt want position to color the cube
