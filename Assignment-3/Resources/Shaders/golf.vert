@@ -13,7 +13,7 @@ void main() {
     p = vec3(v / 4, v % 6 > 1, v % 2) - .5;
 
     // rotates the second |_| to mesh with the first one
-    // could be inlined if I didnt want position to color the cube
+    // could be inlined if I didn't need p for shading later
     p = gl_InstanceID > 0 ? -p.zyx : p;
 
     gl_Position = P * MV * vec4(p, 1);
