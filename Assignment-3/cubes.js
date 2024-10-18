@@ -31,7 +31,7 @@ function onLoadResources() {
     gl.enable(gl.SCISSOR_TEST);
     gl.enable(gl.DEPTH_TEST);
 
-    gl.disable(gl.CULL_FACE);
+    gl.enable(gl.CULL_FACE);
     gl.cullFace(gl.BACK);
 
     let cubes = [
