@@ -16,42 +16,46 @@ vec2 quadVertices(int idx) {
 void main() {
     vec2 quad = quadVertices(gl_VertexID);
     switch(gl_InstanceID) {
-        case 0:
-            vPosition.x = quad.x;
-            vPosition.y = quad.y;
-            vPosition.z = -0.5;
-            vPosition = vPosition.yxz; // flip to front facing
-            break;
-        case 1:
-            vPosition.x = quad.x;
-            vPosition.y = quad.y;
-            vPosition.z = 0.5;
-            
-            break;
-        case 2:
-            vPosition.x = quad.x;
-            vPosition.y = -0.5;
-            vPosition.z = quad.y;
-            
-            break;
-        case 3:
-            vPosition.x = quad.x;
-            vPosition.y = 0.5;
-            vPosition.z = quad.y;
-            vPosition = vPosition.zyx; // flip to front facing
-            break;
-        case 4:
+        case 0: // -x yz
             vPosition.x = -0.5;
             vPosition.y = quad.x;
             vPosition.z = quad.y;
             vPosition = vPosition.xzy; // flip to front facing
             break;
-        case 5:
+        case 1: // -y xz
+            vPosition.x = quad.x;
+            vPosition.y = -0.5;
+            vPosition.z = quad.y;
+            
+            break;
+        case 2: // -z xy
+            vPosition.x = quad.x;
+            vPosition.y = quad.y;
+            vPosition.z = -0.5;
+            vPosition = vPosition.yxz; // flip to front facing
+            break;
+        case 3: // +x yz
             vPosition.x = 0.5;
             vPosition.y = quad.x;
             vPosition.z = quad.y;
             
             break;
+        case 4: // +y xz
+            vPosition.x = quad.x;
+            vPosition.y = 0.5;
+            vPosition.z = quad.y;
+            vPosition = vPosition.zyx; // flip to front facing
+            break;
+        case 5: // +z xy
+            vPosition.x = quad.x;
+            vPosition.y = quad.y;
+            vPosition.z = 0.5;
+            
+            break;
+
+
+
+
     }
     gl_Position = P * MV * vec4(vPosition,1);
 }
