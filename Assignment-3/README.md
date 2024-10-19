@@ -1,9 +1,8 @@
 This is my submission for assignment 3 of CS-375.
 [It is hosted here](https://blue.cs.sonoma.edu/~hblakey/CS-375/Assignment-3/cubes.html)
 
-This version uses the fetch api so I can write shaders in their own files, with proper auto complete and inline documentation. There is a global ResourceManager singleton, and each cube requests the shaders it needs at module scope. The requests are fulfilled at the end of cubes.js, before the init() function is called.
-
-**(Note: some commit timestamps are incorrect. In particular, the work for "fix return statement in vec3()" and "first pass at experimental cube" was completed in the same session as the commits before it)**
+It makes use of async modules and the fetch api, so I can write shaders in their own files 
+with autocomplete and inline documentation.
 
 It renders a cube using three different methods:
 
@@ -18,7 +17,8 @@ It renders a cube using three different methods:
       2. Each vertex can be a part of multiple triangles
    2. Per vertex attributes for color and position stored in separate buffers
 3. With bufferless rendering, in ExperimentalCube.js
-   1. Uses gl.drawArrays()
-      1. Each triangle is independant
+   1. Uses gl.drawArraysInstanced() wtih gl.TRIANGLE_STRIP
+      1. Triangles share vertices via connected primitives
+      2. Uses two instances, each draws three cube faces
    2. Model space vertex positions are generated in the vertex shader
    3. Uses no vertex attributes
