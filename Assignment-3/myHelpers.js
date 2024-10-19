@@ -1,3 +1,16 @@
+const resourcePath = "./Resources";
+const shaderPath = resourcePath + "/Shaders";
+
+async function getShaderSource(name) {
+    var res = Object();
+    res.frag = await((await fetch(shaderPath + "/" + name + ".frag", {cache: "no-cache"})).text());
+    res.vert = await((await fetch(shaderPath + "/" + name + ".vert", {cache: "no-cache"})).text());
+    if (!res.frag || !res.vert) {
+        alert("unable to find shaders at " + shaderPath + name);
+    }
+    return res
+}
+
 cubePositions = [
     // -z
     vec3(0, 0, 0),

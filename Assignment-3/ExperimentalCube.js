@@ -4,16 +4,11 @@
 //
 //  A cube defined ???
 //
-import resourceLoader from "./modules/ResourceLoader.js";
 
-const defaultShaderName = "golf";
-
-resourceLoader.requestShader(defaultShaderName);
+let defaultShader = await getShaderSource("golf");
 
 class ExperimentalCube {
     constructor(/** @type {WebGL2RenderingContext} */gl   , vertexShader, fragmentShader) {
-        let defaultShader = resourceLoader.getShader(defaultShaderName);
-
         vertexShader    ||= defaultShader.vert;
         fragmentShader  ||= defaultShader.frag;
 
