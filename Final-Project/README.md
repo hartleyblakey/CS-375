@@ -1,12 +1,9 @@
 # CS 375 Final Project
 
 
-## Continued Work
+## Continued Work (Moved Repo)
 ![screenshot](/Final-Project/screenshots/sponza_dof_hdri.png?raw=true)
-Added depth of field, and CPU raycasting to find focal distance. 
-
-Added support for an equirectangular environment map
- - No importance sampling yet
+Moved work to the hartleyblakey/raytracer repo
 
 ## Final State
 ![screenshot](/Final-Project/screenshots/sponza.png?raw=true)
